@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native';
 import CustomButton from '../components/CustomButton';
 import NumberContainer from '../components/NumberContatiner';
+import {Ionicons} from "@expo/vector-icons"
 
 let minBandary= 1
 let maxBandary =  100
@@ -25,7 +26,7 @@ const GameScreen = ({userNumber,onGameover}) => {
             minBandary = current + 1
             
         }
-        console.log(`min = ${minBandary}, max = ${maxBandary} , usernumber = ${userNumber}`)
+        
         const newRndNum = generateRandomBetween(minBandary,maxBandary,current)
         setCurrent(newRndNum)
 
@@ -57,13 +58,19 @@ const GameScreen = ({userNumber,onGameover}) => {
             
             <View style={styles.container}>
                 <Text style={styles.title}>Opponent's Guess</Text>
-                <NumberContainer userNumber = {current}/>
+                
 
                 <View style={styles.topContainer}  >
-                    <Text >Higher or Lower</Text>
+                    <NumberContainer userNumber = {current}/>
+                    <Text style={styles.title} >Higher or Lower</Text>
                     <View style={styles.btnContainer}>
-                        <CustomButton presHandler={nextGuessHandler.bind(this,"lower")}>-</CustomButton>
-                        <CustomButton presHandler ={nextGuessHandler.bind(this,"higher")}>+</CustomButton>
+
+                        <CustomButton presHandler={nextGuessHandler.bind(this,"lower")}>
+                            <Ionicons name={'md-remove'} size={24} />
+                            </CustomButton>
+                        <CustomButton presHandler ={nextGuessHandler.bind(this,"higher")}>
+                            <Ionicons name={'md-add'} size={24} />
+                            </CustomButton>
                     </View>
                 </View>
                 <View></View>
@@ -88,8 +95,9 @@ const styles = StyleSheet.create({
       fontWeight:"bold",
       textAlign:"center",
       borderWidth:2,
-      borderColor:"#6AAAB3",
+      borderColor:"white",
       padding:8,
+      marginBottom:24,
     },
     btnContainer:{
       display:"flex",
@@ -97,11 +105,16 @@ const styles = StyleSheet.create({
       gap:16,
       marginBottom:20,
       
+      
     },
 
     topContainer:{
-        flex:1,
+        
         alignItems:"center",
+        backgroundColor:"#6AAAB3",
+        marginTop: 32,
+        opacity:0.9,
+        borderRadius:16,
         
     }
 

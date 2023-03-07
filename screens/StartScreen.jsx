@@ -24,7 +24,10 @@ const StartScreen = ({onConfirmedNumber}) => {
        setUserInput(input)
     }
     return (
+        <View>
+            <Text style={styles.title}>Gues My Number</Text>
         <View style={styles.container}>
+            <Text style={styles.instruction}>Enter a Number</Text>
             <TextInput style={styles.input}
              maxLength={2}
              keyboardType="number-pad"
@@ -34,7 +37,9 @@ const StartScreen = ({onConfirmedNumber}) => {
              onChangeText={inputHandler}
              
              />
+             
              <View style={styles.btnContainer} >
+                
                 <View style={styles.btn} >
                     <CustomButton presHandler={confirmHandler}>Confitm</CustomButton>
                 </View>
@@ -43,6 +48,7 @@ const StartScreen = ({onConfirmedNumber}) => {
                 </View>
 
              </View>
+        </View>
         </View>
     );
 };
@@ -59,9 +65,6 @@ const styles = StyleSheet.create({
         marginHorizontal:5,
         gap:16,
         opacity: 0.9,
-        
-        
-
     },
     input:{
        height:50,
@@ -83,7 +86,23 @@ const styles = StyleSheet.create({
     },
     btn:{
         flex:1
-    }
+    },
+    title:{
+      color:"white",
+      marginTop:48,
+      fontSize:24,
+      fontWeight:"bold",
+      textAlign:"center",
+      borderWidth:2,
+      borderColor:"#6AAAB3",
+      padding:8,
+    },
+    instruction:{
+     color:"white",
+     fontSize:24,
+      fontWeight:"bold",
+      textAlign:"center",
+    },
 });
 
 export default StartScreen;

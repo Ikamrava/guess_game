@@ -2,10 +2,15 @@ import { useState } from "react";
 import { StyleSheet, View, ImageBackground, SafeAreaView } from "react-native";
 import GameOver from "./screens/GameOver";
 import GameScreen from "./screens/GameScreen";
-
+import { useFonts } from "expo-font";
 import StartScreen from "./screens/StartScreen";
 
 export default function App() {
+  const [fontLoaded] = useFonts({
+    "open-sensR": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sensB": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+
   const [userNumber, setUserNumber] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
@@ -39,7 +44,6 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.ImageBackground}
       >
-        <SafeAreaView></SafeAreaView>
         {screen}
       </ImageBackground>
     </View>
