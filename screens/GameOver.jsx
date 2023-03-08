@@ -13,8 +13,8 @@ const GameOver = ({userNumber,roundsNumber,restartHandler}) => {
                 </View>
                 <View>
                     <Text style={styles.result}>
-                        Your won the game in <Text style={styles.numbers}>{roundsNumber} </Text>
-                         rounds Your number was:  <Text style={styles.numbers}>{userNumber}</Text>
+                        Your phone guessed your number in <Text style={styles.numbers}>{roundsNumber} </Text>
+                         rounds. Your number was:  <Text style={styles.numbers}>{userNumber}</Text>
                     </Text>
                 </View>
                 <CustomButton presHandler = {restartHandler}>Start Again</CustomButton>
