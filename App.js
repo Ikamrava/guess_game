@@ -6,6 +6,8 @@ import { useFonts } from "expo-font";
 import StartScreen from "./screens/StartScreen";
 
 export default function App() {
+  const [rounds, setRounds] = useState(0);
+
   const [fontLoaded] = useFonts({
     "open-sensR": require("./assets/fonts/OpenSans-Regular.ttf"),
     "open-sensB": require("./assets/fonts/OpenSans-Bold.ttf"),
@@ -14,22 +16,41 @@ export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
+  function startNewGame() {
+    setUserNumber(null);
+    setGameOver(false);
+    setRounds(0);
+    console.log(rounds);
+  }
+
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
   }
 
-  function gameOverHandler() {
+  function gameOverHandler(roundNumbers) {
     setGameOver(true);
+    setRounds(roundNumbers);
   }
 
   let screen = <StartScreen onConfirmedNumber={pickedNumberHandler} />;
-  if (!userNumber) {
-    screen;
-  } else if (gameOver) {
-    screen = <GameOver />;
-  } else {
+
+  if (userNumber) {
     screen = (
       <GameScreen userNumber={userNumber} onGameover={gameOverHandler} />
+    );
+  }
+
+  if (!userNumber) {
+    screen;
+  }
+
+  if (gameOver && userNumber) {
+    screen = (
+      <GameOver
+        userNumber={userNumber}
+        roundsNumber={rounds}
+        restartHandler={startNewGame}
+      />
     );
   }
 

@@ -10,23 +10,27 @@ import {Ionicons} from "@expo/vector-icons"
 let minBandary= 1
 let maxBandary =  100
 const GameScreen = ({userNumber,onGameover}) => {
+    const [rounds, setRounds] = useState(0);
+
+    useEffect(()=>{
+        minBandary=1
+        maxBandary =  100
+    },[])
 
 
     function nextGuessHandler (direction){
-
         if((direction === "lower" && current < userNumber) || (direction === "higher" && current > userNumber)){
-
             Alert.alert("This is Wrong", "You know this is Wrong!" , [{text:"Sorry", style:"cancel"}])
             return
           }
 
         if(direction === "lower"){
             maxBandary = current
+            setRounds(prev=> prev + 1)
         }else{
             minBandary = current + 1
-            
+            setRounds(prev=> prev + 1)
         }
-        
         const newRndNum = generateRandomBetween(minBandary,maxBandary,current)
         setCurrent(newRndNum)
 
@@ -35,6 +39,7 @@ const GameScreen = ({userNumber,onGameover}) => {
 
 
     const generateRandomBetween = (min,max,exclude)=>{
+        
         
         const rndNUM = Math.floor(Math.random() * (max-min)) + min
         if (rndNUM === exclude){
@@ -49,7 +54,7 @@ const GameScreen = ({userNumber,onGameover}) => {
 
     useEffect(()=>{
       if(current === userNumber){
-        onGameover()
+        onGameover(rounds)
       }
     },[current,userNumber,onGameover])
     
@@ -58,8 +63,6 @@ const GameScreen = ({userNumber,onGameover}) => {
             
             <View style={styles.container}>
                 <Text style={styles.title}>Opponent's Guess</Text>
-                
-
                 <View style={styles.topContainer}  >
                     <NumberContainer userNumber = {current}/>
                     <Text style={styles.title} >Higher or Lower</Text>
