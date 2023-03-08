@@ -20,7 +20,6 @@ export default function App() {
     setUserNumber(null);
     setGameOver(false);
     setRounds(0);
-    console.log(rounds);
   }
 
   function pickedNumberHandler(pickedNumber) {
